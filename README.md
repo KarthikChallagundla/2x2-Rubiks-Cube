@@ -2,16 +2,6 @@
 
 This project is a Python and NumPy-based 2x2 Rubik's Cube simulator and solver. It enables users to simulate the cube, perform various moves, scramble it, and compute the optimal solution for any scrambled configuration.
 
-## ScreenShots
-### Initial Cube State
-![Initial Cube State](static/screenshot/initial_cube.png?raw=true)
-### Scrambled Cube
-![Scrambled Cube](static/screenshot/scrambled_cube.png?raw=true)
-### Solution Steps
-![Solution Steps](static/screenshot/solution_steps.png?raw=true)
-### Solved Cube
-![Solved Cube](static/screenshot/solved_cube.png?raw=true)
-
 ## Features
 
 - Simulate a 2x2 Rubik's Cube with all standard moves (rotations of any face).
