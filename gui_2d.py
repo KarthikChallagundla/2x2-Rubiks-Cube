@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import Canvas
 import numpy as np
 from pieces import Cube
+from solve import Solver
 
 class CubeGUI:
     def __init__(self, cube):
@@ -16,7 +17,17 @@ class CubeGUI:
         }
         self.window = tk.Tk()
         self.window.title("2x2 Rubik's Cube")
-        self.canvas = Canvas(self.window, width=600, height=600, bg="black")
+        self.canvas = Canvas(self.window, width=600, height=400, bg="black")
+        frame = tk.Frame(self.window)
+        frame.pack(pady=10)
+
+        scrollbar = tk.Scrollbar(frame)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        self.moves_text = tk.Text(frame, height=3, width=70, yscrollcommand=scrollbar.set)
+        self.moves_text.pack(side=tk.LEFT)
+
+        scrollbar.config(command=self.moves_text.yview)
         self.canvas.pack()
         self.draw_cube()
 
@@ -69,6 +80,17 @@ class CubeGUI:
         self.canvas.delete("all")
         self.draw_cube()
 
+    def solve_cube(self):
+        cube_str = self.cube.cube_str()
+        temp_cube = Cube(cube_str)
+        solver = Solver(temp_cube)
+        solver.solve()
+
+        self.solution_moves = solver.moves
+
+        self.moves_text.delete("1.0", tk.END)
+        self.moves_text.insert(tk.END, " ".join(self.solution_moves))
+
     def run(self):
         control_frame = tk.Frame(self.window)
         control_frame.pack()
@@ -78,6 +100,9 @@ class CubeGUI:
         for move in moves:
             button = tk.Button(control_frame, text=move, command=lambda m=move: self.apply_move(m))
             button.pack(side="left")
+
+        solve_btn = tk.Button(control_frame, text="Solve Cube", command=self.solve_cube)
+        solve_btn.pack(side="left")
 
         self.window.mainloop()
 
