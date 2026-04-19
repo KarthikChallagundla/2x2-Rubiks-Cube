@@ -44,9 +44,16 @@ This project is a Python and NumPy-based 2x2 Rubik's Cube simulator and solver. 
     python cube.py
     ```
 
-5. To use the GUI:
+5. To run visualization using tkinter, run the following script:
 
-    - Running `cube.py` will launch the Tkinter-based GUI window where you can visualize the cube and interact with it.
+    ```
+    python gui_2d.py
+    ```
+
+6. To use the GUI:
+
+    - Run any one of the file from `cube.py` or `gui_2d.py` to see the simulation
+    - Running `gui_2d.py` will launch the Tkinter-based GUI window where you can visualize the cube and interact with it.
 
 ## Usage
 
