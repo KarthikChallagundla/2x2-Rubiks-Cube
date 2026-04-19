@@ -139,6 +139,48 @@ def display_cube(list):
     print(f"{color_piece(left_face[2])} {color_piece(left_face[3])} {color_piece(front_face[2])} {color_piece(front_face[3])} {color_piece(right_face[2])} {color_piece(right_face[3])} {color_piece(back_face[2])} {color_piece(back_face[3])}", end='\n\n')
     print(f"      {color_piece(down_face[0])} {color_piece(down_face[1])}            ", end='\n\n')
     print(f"      {color_piece(down_face[2])} {color_piece(down_face[3])}            ", end='\n\n')
+
+def update_faces(corners):
+    for i in corners:
+        pos = i.position
+        col = i.colors
+
+        # ---------- FRONT (X = +1) ----------
+        if equal_pos(pos, [1,-1,1]):     front_face[0] = col[0]
+        elif equal_pos(pos, [1,1,1]):    front_face[1] = col[0]
+        elif equal_pos(pos, [1,-1,-1]):  front_face[2] = col[0]
+        elif equal_pos(pos, [1,1,-1]):   front_face[3] = col[0]
+
+        # ---------- RIGHT (Y = +1) ----------
+        if equal_pos(pos, [1,1,1]):      right_face[0] = col[1]
+        elif equal_pos(pos, [-1,1,1]):   right_face[1] = col[1]
+        elif equal_pos(pos, [1,1,-1]):   right_face[2] = col[1]
+        elif equal_pos(pos, [-1,1,-1]):  right_face[3] = col[1]
+
+        # ---------- UP (Z = +1) ----------
+        if equal_pos(pos, [-1,-1,1]):    up_face[0] = col[2]
+        elif equal_pos(pos, [-1,1,1]):   up_face[1] = col[2]
+        elif equal_pos(pos, [1,-1,1]):   up_face[2] = col[2]
+        elif equal_pos(pos, [1,1,1]):    up_face[3] = col[2]
+
+        # ---------- BACK (X = -1) ----------
+        if equal_pos(pos, [-1,1,1]):     back_face[0] = col[0]
+        elif equal_pos(pos, [-1,-1,1]):  back_face[1] = col[0]
+        elif equal_pos(pos, [-1,1,-1]):  back_face[2] = col[0]
+        elif equal_pos(pos, [-1,-1,-1]): back_face[3] = col[0]
+
+        # ---------- LEFT (Y = -1) ----------
+        if equal_pos(pos, [-1,-1,1]):     left_face[0] = col[1]
+        elif equal_pos(pos, [1,-1,1]):    left_face[1] = col[1]
+        elif equal_pos(pos, [-1,-1,-1]):  left_face[2] = col[1]
+        elif equal_pos(pos, [1,-1,-1]):   left_face[3] = col[1]
+
+        # ---------- DOWN (Z = -1) ----------
+        if equal_pos(pos, [1,-1,-1]):     down_face[0] = col[2]
+        elif equal_pos(pos, [1,1,-1]):    down_face[1] = col[2]
+        elif equal_pos(pos, [-1,-1,-1]):  down_face[2] = col[2]
+        elif equal_pos(pos, [-1,1,-1]):   down_face[3] = col[2]
     
 def cube_str(list):
+    update_faces(list)
     return "".join(up_face + left_face[:2] + front_face[:2] + right_face[:2] + back_face[:2] + left_face[2:] + front_face[2:] + right_face[2:] + back_face[2:] + down_face)
